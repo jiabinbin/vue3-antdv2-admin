@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["card-list"],{c767:function(e,a,n){"use strict";n.r(a);var c=n("7a23"),t=Object(c["withScopeId"])("data-v-23d498a5"),d=t((function(e,a,n,c,t,d){return" workplace "})),o=Object(c["defineComponent"])({name:"workplace"});o.render=d,o.__scopeId="data-v-23d498a5";a["default"]=o}}]);
+//# sourceMappingURL=card-list.011fcb39.js.map
