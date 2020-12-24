@@ -5,7 +5,7 @@
  * Desc:
  * version: 1.0.0
  */
-export const APP_ROUTER_MODE = 'history'
+export const APP_ROUTER_MODE = 'hash'
 
 export const OPEN_TOP_MENU = false
 

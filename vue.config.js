@@ -6,6 +6,9 @@
  * version: 1.0.0
  */
 module.exports = {
+  publicPath: process.env.NODE_ENV === 'production'
+    ? '/vue3-antdv2-admin/'
+    : '/',
   devServer: {
     open: true,
     port: 3000
