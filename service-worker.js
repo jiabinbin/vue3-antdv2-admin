@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/v3-antdv-admin/precache-manifest.8d669ff4e878801cf8043cee8746bdf5.js"
+  "/vue3-antdv2-admin/precache-manifest.d55a600b55099e43c27fe91b0f2109d7.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "vue3-antdv2-admin"});
