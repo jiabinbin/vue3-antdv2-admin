@@ -1,64 +1,86 @@
 <template>
-  <a-layout style="min-height: 100vh">
-    <a-layout-sider
-      v-model:collapsed="collapsed"
-      collapsible
-      width="208"
-    >
-      <div class="logo" />
-      <menu-list
-        ref="menuRef"
-        :menu-list="menuList"
-      ></menu-list>
-    </a-layout-sider>
-    <a-layout>
-      <a-layout-header style="background: #fff; padding: 0" />
-      <a-layout-content style="margin: 0 16px">
-        <a-breadcrumb style="margin: 16px 0">
-          <a-breadcrumb-item>User</a-breadcrumb-item>
-          <a-breadcrumb-item>Bill</a-breadcrumb-item>
-        </a-breadcrumb>
-        <div :style="{ padding: '24px', background: '#fff', minHeight: '360px' }">
-          <router-view></router-view>
+  <div class="ant-admin-layout">
+    <a-layout id="layout" style="min-height: 100vh;">
+      <a-layout-sider
+        class="ant-admin-layout-sider"
+        v-model:collapsed="collapsed"
+        collapsible
+        width="208"
+        :collapsedWidth="48"
+        @collapse="changeCollapsed"
+      >
+        <template v-slot:trigger>
+          <div :class="[!collapsed ? 'ant-admin-layout-trigger' : 'ant-admin-layout-trigger-collapsed']">
+            <antdv-MenuFoldOutlined style="font-size: 16px;" v-if="!collapsed"/>
+            <antdv-MenuUnfoldOutlined style="font-size: 16px;" v-else/>
+          </div>
+        </template>
+        <div :class="[!collapsed ? 'ant-admin-sider-logo' : 'ant-admin-sider-logo-collapsed']">
+          <a>
+            <img src="~@/assets/ant-pro-log.svg" alt="logo">
+            <h1 v-if="!collapsed">Antd Vue3</h1>
+          </a>
         </div>
-      </a-layout-content>
-      <a-layout-footer style="text-align: center">
-        Ant Design ©2018 Created by Ant UED
-      </a-layout-footer>
+        <div class="ant-admin-layout-menu">
+          <menu-list></menu-list>
+        </div>
+      </a-layout-sider>
+      <div :class="[!collapsed ? 'ant-admin-layout-menu-hidden' : 'ant-admin-layout-menu-hidden-collapsed']"></div>
+      <a-layout style="position: relative">
+        <Header></Header>
+        <a-layout-content class="ant-admin-layout-content">
+          <div> <!-- :style="{ padding: '24px', background: '#fff', minHeight: '360px' }" -->
+            <router-view></router-view>
+          </div>
+        </a-layout-content>
+        <a-layout-footer :class="[!collapsed ? 'ant-layout-footer' : 'ant-layout-footer-collapsed']">
+          <footer class="ant-admin-layout-footer">
+            ©2018 Created by Jobin Jia
+          </footer>
+        </a-layout-footer>
+      </a-layout>
     </a-layout>
-  </a-layout>
+  </div>
 </template>
 
 <script>
-import { computed, defineComponent, reactive } from 'vue'
-import { useToggle } from '@ant-design-vue/use'
+import { computed, defineComponent, ref } from 'vue'
 import { useStore } from 'vuex'
-import MenuList from './components/Menu'
+import MenuList from '@/components/Layout/components/Menu'
+import Header from '@/components/Layout/components/Header/Header'
+import { getMenuAttributeKeys } from '@/components/Layout/_utils'
+import { useRoute } from 'vue-router'
+
 export default defineComponent({
   name: 'BaseLayout',
   components: {
-    MenuList
+    MenuList,
+    Header
   },
   setup () {
-    // collapsed
-    const [collapsed, { toggle: handleToggleCollapsed }] = useToggle()
-    // reactive
-    const data = reactive({
-      selectedKeys: ['1']
-    })
-    // left menus
     const store = useStore()
+    const route = useRoute()
+    const collapsed = ref(computed(() => store.state.layout.collapsed).value)
+    // antdV menu openKeys
+    const storeOpenKeys = computed(() => store.state.layout.openKeys)
+    const openKeys = ref([...storeOpenKeys.value])
+
     const menuList = computed(() => store.getters['app/leftMenus'])
+
+    const changeCollapsed = (value, type) => {
+      if (value) {
+        store.commit('layout/SET_OPEN_KEYS', [])
+      } else {
+        const { commitOpenKeys } = getMenuAttributeKeys(route.matched, openKeys.value)
+        store.commit('layout/SET_OPEN_KEYS', commitOpenKeys)
+      }
+      store.commit('layout/TOGGLE_COLLAPSED', value)
+    }
     return {
       collapsed,
-      handleToggleCollapsed,
       menuList,
-      ...data
+      changeCollapsed
     }
   }
 })
 </script>
-
-<style scoped lang="less">
-
-</style>

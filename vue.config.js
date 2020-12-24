@@ -14,19 +14,13 @@ module.exports = {
     loaderOptions: {
       less: {
         modifyVars: {
-          // 'primary-color': '#1DA57A'
+          'menu-collapsed-width': '48px',
+          'layout-header-height': '48px'
         },
         javascriptEnabled: true
       }
     }
   },
-  parallel: require('os').cpus().length > 1, // 构建时开启多进程处理babel编译
-  chainWebpack: (config) => {
-    // config.performance.set('hints', false)
-    // config.resolve.alias
-    //   .set('@', resolve('src'))
-    //   .set('@assets', resolve('src/assets'))
-    //   .set('@views', resolve('src/views'))
-    //   .set('@com', resolve('src/components'))
-  }
+  // runtimeCompiler: true, // 运行时编译，默认为false。如需要在使用template: `xxx` 设为true.但会多10kb左右
+  parallel: require('os').cpus().length > 1 // 构建时开启多进程处理babel编译
 }

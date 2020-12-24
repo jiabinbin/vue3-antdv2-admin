@@ -1,24 +1,23 @@
 <template>
   <a-config-provider :locale="locale">
-    <div id="app">
-      <router-view/>
-    </div>
+    <router-view/>
   </a-config-provider>
 </template>
 
 <script>
 import { defineComponent } from 'vue'
 import initApplication from '@/utils/bootstrap'
-import { useI18n } from 'vue-i18n'
+// import { useI18n } from 'vue-i18n'
+// import { DEFAULT_LANG } from '@/config'
+import locale from 'ant-design-vue/es/locale/zh_CN'
 
 export default defineComponent({
   name: 'app',
   setup () {
     initApplication()
 
-    const { getLocaleMessage } = useI18n()
-    const locale = getLocaleMessage('zh-CN')
-    console.log(locale)
+    // const { getLocaleMessage } = useI18n()
+    // const locale = getLocaleMessage(DEFAULT_LANG)
     return {
       locale
     }

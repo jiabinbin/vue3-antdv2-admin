@@ -13,13 +13,18 @@ import { getLeftMenuList } from '@/utils/app-utils'
 export default {
   namespaced: true,
   state: {
+    userInfo: {
+      username: 'admin',
+      password: 'ddd'
+    },
     topMenus: [],
     leftMenus: []
   },
   getters: {
     leftMenus: (state) => {
       return state.leftMenus.length === 0 ? storage.get('left_menus') : state.leftMenus
-    }
+    },
+    userInfo: state => state.userInfo ? state.userInfo : storage.get('user_info') ? storage.get('user_info') : null
   },
   mutations: {
     SET_LEFT_MENUS: (state, menus) => {

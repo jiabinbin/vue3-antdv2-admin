@@ -10,3 +10,9 @@ export const APP_ROUTER_MODE = 'history'
 export const OPEN_TOP_MENU = false
 
 export const DEFAULT_LANG = 'zh-CN'
+
+/**
+ * 自定义icon组件的组件名默认起头标签
+ * @type {string}
+ */
+export const CUSTOM_ICON_START_WITH = 'custom-icon-'

@@ -5,6 +5,5 @@
  * Desc:
  * version: 1.0.0
  */
-import './antdv'
-import './icons'
-// import './custom-icons'
+import SubMenu from './SubMenu'
+export default SubMenu

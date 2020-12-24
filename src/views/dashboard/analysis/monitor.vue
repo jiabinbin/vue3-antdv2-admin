@@ -1,5 +1,5 @@
 <template>
-  monitor
+  监控
 </template>
 
 <script>

@@ -3,11 +3,9 @@
 </template>
 
 <script>
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-  name: 'RouterMiddleware'
-})
+export default {
+  name: 'TopRouterView'
+}
 </script>
 
 <style scoped lang="less">

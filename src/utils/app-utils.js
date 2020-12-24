@@ -28,8 +28,8 @@ export const renderI18n = key => {
 }
 
 export const getParentRouteName = (currentRouteName, menuList) => {
-  const getArray = (currentRouteName, children, record = []) => {
-    return children.reduce((result, { name, children: innerChildren }) => {
+  const getArray = (currentRouteName, children = [], record = []) => {
+    return children.reduce((result, { name, children: innerChildren = [] }) => {
       if (name === currentRouteName) {
         return [...record, currentRouteName]
       }
