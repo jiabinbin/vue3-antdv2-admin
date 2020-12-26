@@ -1,7 +1,7 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "ed356fab419b6d9688a3",
-    "url": "/vue3-antdv2-admin/css/app.52f47939.css"
+    "revision": "b55b3e4012ebbcc4102a",
+    "url": "/vue3-antdv2-admin/css/app.66614542.css"
   },
   {
     "revision": "d0b42bdbf2e573b55f49",
@@ -16,7 +16,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/vue3-antdv2-admin/img/lang.fdd8f351.svg"
   },
   {
-    "revision": "aaca5018a4d81b3c36d067d08e99bb0c",
+    "revision": "60525196015686f9620f2fbb35d4fbcd",
     "url": "/vue3-antdv2-admin/index.html"
   },
   {
@@ -24,8 +24,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/vue3-antdv2-admin/js/403.48fbcaa7.js"
   },
   {
-    "revision": "ed356fab419b6d9688a3",
-    "url": "/vue3-antdv2-admin/js/app.44f2f4e1.js"
+    "revision": "b55b3e4012ebbcc4102a",
+    "url": "/vue3-antdv2-admin/js/app.d15439e4.js"
   },
   {
     "revision": "864b2fea4f0b36debde1",
