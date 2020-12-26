@@ -11,7 +11,6 @@
         <a-menu-item key="settings">
           英
         </a-menu-item>
-        <a-menu-divider/>
         <a-menu-item key="logout">
           繁
         </a-menu-item>

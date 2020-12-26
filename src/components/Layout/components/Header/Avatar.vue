@@ -6,17 +6,23 @@
       <a-menu
       >
         <a-menu-item key="center">
-          <antdv-UserOutlined/>
-          个人中心
+          <router-link :to="{name: 'center'}">
+            <antdv-UserOutlined/>
+            个人中心
+          </router-link>
         </a-menu-item>
         <a-menu-item key="settings">
-          <antdv-SettingOutlined/>
-          个人设置
+          <router-link :to="{name: 'settings'}">
+            <antdv-SettingOutlined/>
+            个人设置
+          </router-link>
         </a-menu-item>
         <a-menu-divider/>
         <a-menu-item key="logout">
-          <antdv-LogoutOutlined/>
-          退出登录
+          <a>
+            <antdv-LogoutOutlined/>
+            退出登录
+          </a>
         </a-menu-item>
       </a-menu>
     </template>

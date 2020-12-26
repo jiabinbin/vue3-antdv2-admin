@@ -63,12 +63,6 @@ export default defineComponent({
     AppIcon,
     SubMenu
   },
-  props: {
-    // collapsed: {
-    //   type: Boolean,
-    //   required: true
-    // }
-  },
   setup (props) {
     // const router = useRouter()
     const route = useRoute()
@@ -90,8 +84,9 @@ export default defineComponent({
     watch(() => route.name, name => {
       const matched = route.matched
       const { routeSelectedKeys, commitOpenKeys } = getMenuAttributeKeys(matched, openKeys.value)
-      store.commit('layout/SET_SELECTED_KEYS', routeSelectedKeys)
+      // 路由切换时openKeys就用selectedKeys，展开当前菜单，并收起其它菜单
       store.commit('layout/SET_OPEN_KEYS', commitOpenKeys)
+      store.commit('layout/SET_SELECTED_KEYS', routeSelectedKeys)
     }, { immediate: true })
 
     watch(storeOpenKeys, keys => {
