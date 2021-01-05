@@ -5,6 +5,7 @@
     v-model:openKeys="openKeys"
     v-model:selectedKeys="selectedKeys"
     @openChange="openChange"
+    @select="handleSelect"
     class="ant-admin-menu"
     inlineCollapsed
     :inlineIndent="16"
@@ -19,7 +20,7 @@
           :key="menu.name"
         >
           <router-link :to="{name: menu.name}">
-            <AppIcon v-if="menu?.meta?.icon" :icon="menu.meta.icon" />
+            <AppIcon v-if="menu?.meta?.icon" :icon="menu.meta.icon"/>
             <!--          <span>{{ renderI18n(menu?.meta?.i18nTitle) }}</span>-->
             <span>{{ menu?.meta?.title }}</span>
           </router-link>
@@ -33,7 +34,7 @@
           :key="menu.children[0].meta.name"
         >
           <router-link :to="{name: menu.children[0].meta.name}">
-            <AppIcon v-if="menu.children[0].meta.icon" :icon="menu.children[0].meta.icon" />
+            <AppIcon v-if="menu.children[0].meta.icon" :icon="menu.children[0].meta.icon"/>
             <!--          <span>{{ renderI18n(menu?.children[0]?.meta?.i18nTitle) }}</span>-->
             <span>{{ menu?.children[0]?.meta?.title }}</span>
           </router-link>
@@ -55,7 +56,7 @@ import AppIcon from '@/components/AppIcon/AppIcon'
 import SubMenu from '../SubMenu'
 import { useRoute } from 'vue-router'
 import { useStore } from 'vuex'
-import { getMenuAttributeKeys } from '@/components/Layout/_utils'
+import { getMenuOpenKeys } from '@/components/Layout/_utils'
 
 export default defineComponent({
   name: 'Menu',
@@ -70,9 +71,11 @@ export default defineComponent({
     const menuList = computed(() => store.getters['app/leftMenus'])
     // antdV menu openKeys
     const storeOpenKeys = computed(() => store.state.layout.openKeys)
+    // const openKeys = computed(() => store.state.layout.openKeys)
     const openKeys = ref([...storeOpenKeys.value])
     // antdV menu selectedKeys
     const storeSelectedKeys = computed(() => store.state.layout.selectedKeys)
+    // const selectedKeys = computed(() => store.state.layout.selectedKeys)
     const selectedKeys = ref([...storeSelectedKeys.value])
     // collapsed
     const collapsed = ref(computed(() => store.state.layout.collapsed).value)
@@ -81,26 +84,37 @@ export default defineComponent({
       store.commit('layout/SET_OPEN_KEYS', key)
     }
 
+    const setOpenKeys = () => {
+      const openKeys = getMenuOpenKeys(route.matched)
+      store.commit('layout/SET_OPEN_KEYS', openKeys)
+    }
+
+    const handleSelect = ({ key }) => {
+      store.commit('layout/SET_SELECTED_KEYS', [key])
+      // 设置openKeys
+      setOpenKeys()
+    }
+
     watch(() => route.name, name => {
-      const matched = route.matched
-      const { routeSelectedKeys, commitOpenKeys } = getMenuAttributeKeys(matched, openKeys.value)
-      // 路由切换时openKeys就用selectedKeys，展开当前菜单，并收起其它菜单
-      store.commit('layout/SET_OPEN_KEYS', commitOpenKeys)
-      store.commit('layout/SET_SELECTED_KEYS', routeSelectedKeys)
+      const matched = route.matched.pop()
+      const selectedKeys = [matched.name]
+      store.commit('layout/SET_SELECTED_KEYS', selectedKeys)
+      setOpenKeys()
     }, { immediate: true })
 
     watch(storeOpenKeys, keys => {
       openKeys.value = keys
-    }, { immediate: true })
+    }, { immediate: true, deep: true })
 
     watch(storeSelectedKeys, keys => {
       selectedKeys.value = keys
-    }, { immediate: true })
+    }, { immediate: true, deep: true })
 
     return {
       menuList,
       collapsed,
       openChange,
+      handleSelect,
       openKeys,
       selectedKeys
     }

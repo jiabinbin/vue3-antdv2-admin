@@ -10,7 +10,7 @@
         @collapse="changeCollapsed"
       >
         <template v-slot:trigger>
-          <div :class="[!collapsed ? 'ant-admin-layout-trigger' : 'ant-admin-layout-trigger-collapsed']">
+          <div class="ant-admin-layout-trigger">
             <antdv-MenuFoldOutlined style="font-size: 16px;" v-if="!collapsed"/>
             <antdv-MenuUnfoldOutlined style="font-size: 16px;" v-else/>
           </div>
@@ -48,8 +48,8 @@ import { computed, defineComponent, ref } from 'vue'
 import { useStore } from 'vuex'
 import MenuList from '@/components/Layout/components/Menu'
 import Header from '@/components/Layout/components/Header/Header'
-import { getMenuAttributeKeys } from '@/components/Layout/_utils'
 import { useRoute } from 'vue-router'
+import { getMenuOpenKeys } from '@/components/Layout/_utils'
 
 export default defineComponent({
   name: 'BaseLayout',
@@ -62,8 +62,8 @@ export default defineComponent({
     const route = useRoute()
     const collapsed = ref(computed(() => store.state.layout.collapsed).value)
     // antdV menu openKeys
-    const storeOpenKeys = computed(() => store.state.layout.openKeys)
-    const openKeys = ref([...storeOpenKeys.value])
+    // const storeOpenKeys = computed(() => store.state.layout.openKeys)
+    // const openKeys = ref([...storeOpenKeys.value])
 
     const menuList = computed(() => store.getters['app/leftMenus'])
 
@@ -71,8 +71,8 @@ export default defineComponent({
       if (value) {
         store.commit('layout/SET_OPEN_KEYS', [])
       } else {
-        const { commitOpenKeys } = getMenuAttributeKeys(route.matched, openKeys.value)
-        store.commit('layout/SET_OPEN_KEYS', commitOpenKeys)
+        const openKeys = getMenuOpenKeys(route.matched)
+        store.commit('layout/SET_OPEN_KEYS', openKeys)
       }
       store.commit('layout/TOGGLE_COLLAPSED', value)
     }
