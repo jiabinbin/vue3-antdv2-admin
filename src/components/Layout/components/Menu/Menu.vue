@@ -6,7 +6,7 @@
     v-model:selectedKeys="selectedKeys"
     @openChange="openChange"
     @select="handleSelect"
-    class="ant-admin-menu"
+    class="ant-admin-layout-menu"
     inlineCollapsed
     :inlineIndent="16"
   >
@@ -68,7 +68,7 @@ export default defineComponent({
     // const router = useRouter()
     const route = useRoute()
     const store = useStore()
-    const menuList = computed(() => store.getters['app/leftMenus'])
+    const menuList = computed(() => store.getters['app/menus'])
     // antdV menu openKeys
     const storeOpenKeys = computed(() => store.state.layout.openKeys)
     // const openKeys = computed(() => store.state.layout.openKeys)
@@ -121,3 +121,11 @@ export default defineComponent({
   }
 })
 </script>
+
+<style scoped lang="less">
+.ant-admin-layout-menu {
+  flex: 1 1 0%;
+  overflow: hidden auto;
+  height: calc(100vh - 112px)
+}
+</style>

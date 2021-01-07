@@ -1,6 +1,6 @@
 <template>
   <div class="ant-admin-layout">
-    <a-layout id="layout" style="min-height: 100vh;">
+    <a-layout id="layout">
       <a-layout-sider
         class="ant-admin-layout-sider"
         v-model:collapsed="collapsed"
@@ -10,12 +10,12 @@
         @collapse="changeCollapsed"
       >
         <template v-slot:trigger>
-          <div class="ant-admin-layout-trigger">
+          <div class="ant-admin-layout-sider-trigger">
             <antdv-MenuFoldOutlined style="font-size: 16px;" v-if="!collapsed"/>
             <antdv-MenuUnfoldOutlined style="font-size: 16px;" v-else/>
           </div>
         </template>
-        <div :class="[!collapsed ? 'ant-admin-sider-logo' : 'ant-admin-sider-logo-collapsed']">
+        <div :class="[!collapsed ? 'ant-admin-layout-sider-logo' : 'ant-admin-layout-sider-logo-collapsed']">
           <a>
             <img src="~@/assets/ant-pro-log.svg" alt="logo">
             <h1 v-if="!collapsed">Antd Vue3</h1>
@@ -25,15 +25,15 @@
           <menu-list></menu-list>
         </div>
       </a-layout-sider>
-      <div :class="[!collapsed ? 'ant-admin-layout-menu-hidden' : 'ant-admin-layout-menu-hidden-collapsed']"></div>
+      <div :class="[!collapsed ? 'ant-admin-layout-sider-hidden' : 'ant-admin-layout-sider-hidden-collapsed']"></div>
       <a-layout style="position: relative">
         <Header></Header>
         <a-layout-content class="ant-admin-layout-content">
-          <div> <!-- :style="{ padding: '24px', background: '#fff', minHeight: '360px' }" -->
+          <div>
             <router-view></router-view>
           </div>
         </a-layout-content>
-        <a-layout-footer :class="[!collapsed ? 'ant-layout-footer' : 'ant-layout-footer-collapsed']">
+        <a-layout-footer :class="[!collapsed ? 'ant-admin-layout-footer' : 'ant-admin-layout-footer-collapsed']">
           <footer class="ant-admin-layout-footer">
             ©2018 Created by Jobin Jia
           </footer>

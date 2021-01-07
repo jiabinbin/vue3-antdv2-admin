@@ -8,7 +8,7 @@
 import * as storage from 'store'
 import { OPEN_TOP_MENU } from '@/config'
 import routes from '@/router/routes/app.routes'
-import { getLeftMenuList } from '@/utils/app-utils'
+import { getApplicationMenus } from '@/utils/app-utils'
 
 export default {
   namespaced: true,
@@ -17,25 +17,24 @@ export default {
       username: 'admin',
       password: 'ddd'
     },
-    topMenus: [],
-    leftMenus: []
+    menus: []
   },
   getters: {
-    leftMenus: (state) => {
-      return state.leftMenus.length === 0 ? storage.get('left_menus') : state.leftMenus
+    menus: (state) => {
+      return state.menus.length === 0 ? getApplicationMenus(routes) : state.menus
     },
     userInfo: state => state.userInfo ? state.userInfo : storage.get('user_info') ? storage.get('user_info') : null
   },
   mutations: {
     SET_LEFT_MENUS: (state, menus) => {
-      state.leftMenus = menus
-      storage.set('left_menus', menus)
+      state.menus = menus
+      // storage.set('menus', menus)
     }
   },
   actions: {
     initMenus: ({ commit }, menus) => {
       if (!OPEN_TOP_MENU) {
-        const menus = getLeftMenuList(routes)
+        const menus = getApplicationMenus(routes)
         commit('SET_LEFT_MENUS', menus)
       }
     }

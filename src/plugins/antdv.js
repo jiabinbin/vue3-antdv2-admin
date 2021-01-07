@@ -5,7 +5,7 @@
  * Desc:
  * version: 1.0.0
  */
-import app from '../app'
+import app from '@/app'
 import {
   Layout,
   Input,

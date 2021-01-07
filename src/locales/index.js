@@ -6,7 +6,6 @@
  * version: 1.0.0
  */
 import { createI18n } from 'vue-i18n'
-import app from '../app'
 import zhCN from 'ant-design-vue/lib/locale/zh_CN'
 import enUS from 'ant-design-vue/lib/locale/en_US'
 import { DEFAULT_LANG } from '@/config'
@@ -28,4 +27,4 @@ const i18n = createI18n({
   }
 })
 
-app.use(i18n)
+export default i18n

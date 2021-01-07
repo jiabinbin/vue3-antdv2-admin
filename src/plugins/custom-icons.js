@@ -49,6 +49,5 @@ const generatorIconComponent = icon => {
 
 icons.forEach(icon => {
   const instance = generatorIconComponent(icon)
-  console.log(instance)
   app.component(instance.name, instance)
 })

@@ -7,7 +7,7 @@
  */
 import { APP_ROUTER_MODE } from '@/config'
 import { createWebHashHistory, createWebHistory } from 'vue-router'
-import { useI18n } from 'vue-i18n'
+// import { useI18n } from 'vue-i18n'
 
 export const getAppRouterMode = () => {
   if (APP_ROUTER_MODE === 'history') {
@@ -17,14 +17,14 @@ export const getAppRouterMode = () => {
   }
 }
 
-export const getLeftMenuList = routes => {
-  return routes[0].children
+export const getApplicationMenus = routes => {
+  return routes.filter(it => !it.meta.hidden)
 }
 
 export const renderI18n = key => {
-  if (!key) return 'unKnown title'
-  const { t } = useI18n()
-  return t(key)
+  // if (!key) return 'unKnown title'
+  // const { t } = useI18n()
+  // return t(key)
 }
 
 export const getParentRouteName = (currentRouteName, menuList) => {

@@ -4,19 +4,17 @@
   >
     <template #overlay>
       <a-menu>
-        <a-menu-item key="tabs" disabled>
-          <a-tabs>
-            <a-tab-pane key="1" tab="通知" force-render>
-              1
-            </a-tab-pane>
-            <a-tab-pane key="2" tab="消息">
-              2
-            </a-tab-pane>
-            <a-tab-pane key="3" tab="代办">
-              3
-            </a-tab-pane>
-          </a-tabs>
-        </a-menu-item>
+        <a-tabs>
+          <a-tab-pane key="1" tab="通知" force-render>
+            1
+          </a-tab-pane>
+          <a-tab-pane key="2" tab="消息">
+            2
+          </a-tab-pane>
+          <a-tab-pane key="3" tab="代办">
+            3
+          </a-tab-pane>
+        </a-tabs>
       </a-menu>
     </template>
     <div
