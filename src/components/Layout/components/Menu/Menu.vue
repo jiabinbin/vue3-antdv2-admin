@@ -96,7 +96,8 @@ export default defineComponent({
     }
 
     watch(() => route.name, name => {
-      const matched = route.matched.pop()
+      const routeMatched = [...route.matched]
+      const matched = routeMatched.pop()
       const selectedKeys = [matched.name]
       store.commit('layout/SET_SELECTED_KEYS', selectedKeys)
       setOpenKeys()

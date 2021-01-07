@@ -6,13 +6,13 @@
       <a-menu
       >
         <a-menu-item key="center">
-          中
+          🇨🇳 简体中文
         </a-menu-item>
         <a-menu-item key="settings">
-          英
+          🇭🇰 繁体中文
         </a-menu-item>
         <a-menu-item key="logout">
-          繁
+          🇺🇸 English
         </a-menu-item>
       </a-menu>
     </template>
